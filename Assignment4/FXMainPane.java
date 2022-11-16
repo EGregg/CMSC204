@@ -1,3 +1,12 @@
+/*
+ * Author: Edward Gregg
+ * Class: CMSC 204
+ * Project: Assignment 4
+ * Due Date: Nov ??, 2022
+ *
+ * 
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,3 +1,11 @@
+/*
+ * Author: Edward Gregg
+ * Class: CMSC 204
+ * Project: Assignment 4
+ * Due Date: Nov ??, 2022
+ *
+ * 
+ */
 
 public class CourseDBElement implements Comparable {
   private String courseId;
@@ -8,7 +16,7 @@ public class CourseDBElement implements Comparable {
 
   
   /**
-   * Constructor with parameters
+   * constructor that creates object for this class
    * @param courseId
    * @param crn
    * @param credits
@@ -106,27 +114,25 @@ public class CourseDBElement implements Comparable {
   }
 
   /**
-   * @return the hashcode computation of the CDE based on the string value of the CRN
+   * @return CRN gets hashed because it's unique to every class
+   * found online, way for hasing
    */
   @Override
-  public int hashCode() {
-    String s = String.valueOf(getCRN());
-    long hash = 0;
-    int prime = 31;
-    for (int i = 0; i < s.length(); i++) {
-      hash = prime * hash + s.charAt(i);
-    }
-    return (int) hash;
-  }
+	public int hashCode() {
+		String code = Integer.toString(CRN);
+		return code.hashCode();
+	}
+  
+	public String crnString() {
+		return Integer.toString(CRN);
+	}
 
-  /**
-   * @return the String representation in this format: \nCourse:CMSC203 CRN:30503 Credits:4
-   *         Instructor:Jill B. Who-Dunit Room:SC450
-   */
+/**
+ * generic toString
+ */
   @Override
   public String toString() {
-    return "\nCourse:" + courseId + " CRN:" + CRN + " Credits:" + credits + " Instructor:"
-        + instructor + " Room:" + room;
+    return "\nCourse:" + courseId + " CRN:" + CRN + " Credits:" + credits + " Instructor:" + instructor + " Room:" + room;
   }
 
   /**
@@ -139,11 +145,7 @@ public class CourseDBElement implements Comparable {
     return Integer.compare(this.getCRN(), element.getCRN());
   }
   
-  /**
-   * The comparison for equality will be based in the CRN
-   * 
-   * @param obj - object to be compared with
-   */
+
   @Override
   public boolean equals(Object obj) {
     if (obj == null){

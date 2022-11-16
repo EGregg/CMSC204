@@ -22,8 +22,8 @@ import static org.junit.Assert.*;
  * which is implemented from the CourseDBManagerInterface
  * 
  */
-public class CourseDBManagerTest {
-  private CourseDBManagerInterface dataMgr =  new CourseDBManager();
+public class CourseDBManagerTest_STUDENT {
+  private CourseDBManagerInterface database =  new CourseDBManager();
 
   /**
    * Create an instance of CourseDBManager
@@ -31,16 +31,16 @@ public class CourseDBManagerTest {
    */
   @Before
   public void setUp() throws Exception {
-		dataMgr = new CourseDBManager();
+		database = new CourseDBManager();
   }
 
   /**
-   * Set dataMgr reference to null
+   * Set database reference to null
    * @throws Exception
    */
   @After
   public void tearDown() throws Exception {
-		dataMgr = null;
+		database = null;
   }
 
   /**
@@ -49,7 +49,8 @@ public class CourseDBManagerTest {
   @Test
   public void testAddToDB() {
 		try {
-			dataMgr.add("CMSC203",30504,4,"SC450","Joey Bag-O-Donuts");
+			database.add("CMSC203",30522,1,"SC450","Homer Simpson");
+			database.add("CMSC203",30535,4,"SC450","Clark Kent");
 		}
 		catch(Exception e) {
 			fail("This should not have caused an Exception");
@@ -61,10 +62,10 @@ public class CourseDBManagerTest {
    */
   @Test
   public void testShowAll() {
-		dataMgr.add("CMSC203",30504,4,"SC450","Joey Bag-O-Donuts");
-		dataMgr.add("CMSC203",30503,4,"SC450","Jill B. Who-Dunit");
-		dataMgr.add("CMSC204",30559,4,"SC450","BillyBob Jones");
-		ArrayList<String> list = dataMgr.showAll();
+		database.add("CMSC203",30504,4,"SC450","Joey Bag-O-Donuts");
+		database.add("CMSC203",30503,4,"SC450","Jill B. Who-Dunit");
+		database.add("CMSC204",30559,4,"SC450","BillyBob Jones");
+		ArrayList<String> list = database.showAll();
 		assertEquals(list.get(0),"\nCourse:CMSC204 CRN:30559 Credits:4 Instructor:BillyBob Jones Room:SC450");
 	 	assertEquals(list.get(1),"\nCourse:CMSC203 CRN:30503 Credits:4 Instructor:Jill B. Who-Dunit Room:SC450");
 		assertEquals(list.get(2),"\nCourse:CMSC203 CRN:30504 Credits:4 Instructor:Joey Bag-O-Donuts Room:SC450");
@@ -82,10 +83,10 @@ public class CourseDBManagerTest {
 			inFile.print("CMSC204 30503 4 SC450 Jill B. Who-Dunit");
 			
 			inFile.close();
-			dataMgr.readFile(inputFile);
-			assertEquals("CMSC203",dataMgr.get(30504).getID());
-			assertEquals("CMSC204",dataMgr.get(30503).getID());
-			assertEquals("SC450",dataMgr.get(30503).getRoomNum());
+			database.readFile(inputFile);
+			assertEquals("CMSC203",database.get(30504).getID());
+			assertEquals("CMSC204",database.get(30503).getID());
+			assertEquals("SC450",database.get(30503).getRoomNum());
 		} catch (Exception e) {
 			fail("Should not have thrown an exception");
 		}

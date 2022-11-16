@@ -1,3 +1,12 @@
+/*
+ * Author: Edward Gregg
+ * Class: CMSC 204
+ * Project: Assignment 4
+ * Due Date: Nov ??, 2022
+ *
+ * 
+ */
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -25,7 +34,7 @@ public class CourseDBStructure implements CourseDBStructureInterface {
 				  
 
 
-			//needs to be this way to pass test, do not touch
+			//nope this is broke, think it's related to showAll
 			  //EG
 			  @Override
 			  public int getTableSize() {
@@ -73,11 +82,13 @@ public class CourseDBStructure implements CourseDBStructureInterface {
 			    }
 			    return hashIndex;
 	  }
-	
+
 	@Override
 	public ArrayList<String> showAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+		
+		
+	}
 
-}
