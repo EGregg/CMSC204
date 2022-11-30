@@ -1,33 +1,40 @@
 
 
 public class TreeNode<T> {
-
+	
+	/*
+	 * do not touch these, if you do I will throw tape
+	 */
 	protected TreeNode<T> leftChild, rightChild;
 	private T data;
 	
 	/**
 	 * Create a new TreeNode with left and right child set to null and data set to the dataNode
-	 * @param dataNode the data to be stored in the node
+	 * 
+	 * @param
 	 */
 	public TreeNode(T dataNode) {
-		leftChild = null;
-		rightChild = null;
-		data = dataNode;
+		this.data = dataNode;
+		this.leftChild = null;
+		this.rightChild = null;
 	}
 	
 	/**
-	 * Creates a new TreeNode which is a deep copy of the given parameter
-	 * @param node the node to be copied
+	 * 
+	 * 
+	 * @param
 	 */
 	public TreeNode(TreeNode<T> node) {
-		leftChild = node.leftChild;
-		rightChild = node.rightChild;
-		data = node.getData();
+		this.data = node.getData();
+		this.leftChild = node.leftChild;
+		this.rightChild = node.rightChild;
+		
 	}
 	
 	/**
-	 * Returns the data within the TreeNode
-	 * @return the data within the node
+	 * Returns the data
+	 * @return the data
+	 * 
 	 */
 	public T getData() {
 		return data;

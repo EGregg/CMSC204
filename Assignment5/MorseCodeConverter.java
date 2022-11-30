@@ -1,6 +1,4 @@
-/*
- * free reign on comments and naming conventions in this file
- */
+//It's working, don't touch
 
 
 import java.io.BufferedReader;
@@ -36,33 +34,11 @@ public class MorseCodeConverter {
 		}
 		return output.trim();
 	}
-	
 	/**
-	 * Converts a MorseCode string into English
-	 * Every letter is delimited by a '.' and every word by a '/'.
-	 * @param code the morse code string
-	 * @return the English translation
-	 */
-	public static String convertToEnglish(String code) {
-		String output = "";
-		String[] words = code.split("/");
-		for (String word : words) {
-			word = word.trim();
-			String[] letters = word.split(" ");
-			for (String letter : letters) {
-				output += tree.fetch(letter);
-			}
-			output += " ";
-		}
-		return output.trim();
-	}
-	
-	/**
-	 * Converts a file of MorseCode into English
-	 * Every letter is delimited by a '.' and every word by a '/'.
-	 * @param codeFile the file that contains MorseCode
+	 * Every word seperated by a "/".
+	 * @param codeFile is the name of the file with the code in it
 	 * @return the English translation of the file
-	 * @throws FileNotFoundException thrown if file is not found
+	 * @throws FileNotFoundException file not found
 	 */
 	public static String convertToEnglish(File codeFile) throws FileNotFoundException {
 		String output = "";
@@ -73,10 +49,41 @@ public class MorseCodeConverter {
 		}
 		return output;
 	}
-	
-	public static void main(String[] args) {
-		MorseCodeConverter test = new MorseCodeConverter();
-		System.out.println(test.convertToEnglish("--. .. ...- . / -- . / -.-- --- ..- .-. / .- -. ... .-- . .-. / -.. ---"));
+		
+	/**
+	 * Converts a MorseCode string into English
+	 * Every letter is delimited by a '.' and every word by a "/".
+	 * Example: ".- .-.. .-.. / .... ..- -- .- -."
+	 * 
+	 * @param code the morse code
+	 * @return the English translation
+	 * 
+	 * this part was found on geeksforgeeks
+	 */
+	public static String convertToEnglish(String code) {
+		String output = "";
+		
+		String[] sentence = code.split("/");
+		
+		for (String word : sentence) {
+			
+			word = word.trim();
+			
+			String[] letters = word.split(" ");
+			
+			for (String letter : letters) {
+				
+				output += tree.fetch(letter);
+			}
+			output += " ";
+		}
+		return output.trim();
 	}
+	
+
+//	public static void main(String[] args) {
+//		MorseCodeConverter test = new MorseCodeConverter();
+//		System.out.println(test.convertToEnglish("--. .. ...- . / -- . / -.-- --- ..- .-. / .- -. ... .-- . .-. / -.. ---"));
+//	}
 	
 }
