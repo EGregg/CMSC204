@@ -1,3 +1,10 @@
+/*
+ * Author: Edward Gregg
+ * Class: CMSC 204
+ * Project: Assignment 5
+ * Due Date: Nov 30, 2022
+ * 
+ */
 
 /**
  * An application to convert Morse Code into English.

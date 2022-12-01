@@ -1,3 +1,12 @@
+/*
+ * Author: Edward Gregg
+ * Class: CMSC 204
+ * Project: Assignment 5
+ * Due Date: Nov 30, 2022
+ * 
+ */
+
+
 import java.util.ArrayList;
 
 
@@ -112,6 +121,7 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String> {
 		}else {
 			if (code.charAt(0)=='.') {
 				root = root.leftChild;
+				
 			}else if (code.charAt(0)=='-') {
 				root = root.rightChild;
 			}

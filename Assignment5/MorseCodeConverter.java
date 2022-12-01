@@ -1,3 +1,12 @@
+/*
+ * Author: Edward Gregg
+ * Class: CMSC 204
+ * Project: Assignment 5
+ * Due Date: Nov 30, 2022
+ * 
+ */
+
+
 //It's working, don't touch
 
 
@@ -79,11 +88,4 @@ public class MorseCodeConverter {
 		}
 		return output.trim();
 	}
-	
-
-//	public static void main(String[] args) {
-//		MorseCodeConverter test = new MorseCodeConverter();
-//		System.out.println(test.convertToEnglish("--. .. ...- . / -- . / -.-- --- ..- .-. / .- -. ... .-- . .-. / -.. ---"));
-//	}
-	
 }

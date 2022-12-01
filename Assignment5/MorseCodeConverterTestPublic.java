@@ -1,4 +1,13 @@
+/*
+ * Author: Edward Gregg
+ * Class: CMSC 204
+ * Project: Assignment 5
+ * Due Date: Nov 30, 2022
+ * 
+ */
  
+
+
 import static org.junit.Assert.*;
 
 import java.io.File;
