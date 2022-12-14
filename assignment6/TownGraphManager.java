@@ -1,9 +1,9 @@
 
 /**
- * Leave comments for this one. Had to be implemented
- * @author EGREGG
- *
- */
+ * Author: Edward Gregg
+ * Assignment: Assignment 6
+ * Due Date: 13DEC2022
+*/
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,27 +15,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-/**
- * TownGraphManager will hold an object of your Graph. There are methods to
- * populate the graph (reading from a text file), add a town (vertices), add a
- * road (edge), list all towns and all roads, and list towns adjacent to a given
- * town.
- * 
- * @author Fernando Gonzales-Vigil
- */
 public class TownGraphManager implements TownGraphManagerInterface {
 
 	private Graph graph = new Graph();
 
-	/**
-	 * Adds a road to the graph
-	 * 
-	 * @param town1    - name of town 1
-	 * @param town2    - name of town 2
-	 * @param distance - distance of the road
-	 * @param roadName - name of road
-	 * @return true if the road was added successfully
-	 */
 	@Override
 	public boolean addRoad(String town1, String town2, int distance, String roadName) {
 		if (graph.addEdge(new Town(town1), new Town(town2), distance, roadName) != null) {
@@ -44,14 +27,6 @@ public class TownGraphManager implements TownGraphManagerInterface {
 		return false;
 	}
 
-	/**
-	 * Returns the name of the road that both towns are connected through
-	 * 
-	 * @param town1 - name of town 1
-	 * @param town2 - name of town 2
-	 * @return name of road if town 1 and town2 are in the same road, returns null
-	 *         if not
-	 */
 	@Override
 	public String getRoad(String town1, String town2) {
 		return graph.getEdge(new Town(town1), new Town(town2)).getName();

@@ -122,19 +122,6 @@ public class Graph implements GraphInterface<Town, Road> {
 			}
 		}
 		return output;
-//		if (town == null) {
-//			throw new NullPointerException();
-//		}
-//		Set<Road> roadSet = new HashSet<>();
-//		for (Road r : roads) {
-//			if (r.contains(town)) {
-//				roadSet.add(r);
-//			}
-//		}
-//		if (roadSet.isEmpty()) {
-//			throw new IllegalArgumentException();
-//		}
-//		return roadSet;
 	}
 
 	/**

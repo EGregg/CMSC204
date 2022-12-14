@@ -40,9 +40,7 @@ public class Town implements Comparable<Town> {
 		if (obj == this) {
 			return true;
 		}
-//        if (!(obj instanceof Town)) {
-//          return false;
-//        }
+		
 		Town t = (Town) obj;
 		return this.name.equals(t.name);
 	}
