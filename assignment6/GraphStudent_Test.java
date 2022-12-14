@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class GraphTest {
+public class GraphStudent_Test {
 	private GraphInterface<Town,Road> graph;
 	private Town[] town;
 

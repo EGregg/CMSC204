@@ -1,8 +1,8 @@
 
 /**
- * Leave comments for this one. Had to be implemented
- * @author EGREGG
- *
+ * Author: Edward Gregg
+ * Assignment: Assignment 6
+ * Due Date: 13DEC2022
  */
 
 import java.util.ArrayList;
@@ -20,7 +20,10 @@ public class Graph implements GraphInterface<Town, Road> {
 	private Set<Road> roads = new HashSet<>();
 	private Town destination;
 	private Map<String, Town> prevVertex;
-	
+
+	/*
+	 * Default constructor
+	 */
 	public Graph() {
 		towns = new HashSet<Town>();
 		roads = new HashSet<Road>();
@@ -28,36 +31,46 @@ public class Graph implements GraphInterface<Town, Road> {
 	}
 
 	@Override
-	public Road getEdge(Town sourceVertex, Town destinationVertex) {
+	public Road addEdge(Town beginningPoint, Town destinationVertex, int distance, String description)
+			throws IllegalArgumentException, NullPointerException {
+		if (beginningPoint == null || destinationVertex == null) {
+			throw new NullPointerException();
+		}
+		if (!containsVertex(beginningPoint) || !containsVertex(destinationVertex)) {
+			throw new IllegalArgumentException();
+		}
+		Road road = new Road(beginningPoint, destinationVertex, distance, description);
+		roads.add(road);
+		return road;
+	}
+
+	@Override
+	public Road getEdge(Town beginningPoint, Town destinationVertex) {
 		for (Road r : roads) {
-			if ((sourceVertex.equals(r.getSource()) || sourceVertex.equals(r.getDestination()))
+			if ((beginningPoint.equals(r.getSource()) || beginningPoint.equals(r.getDestination()))
 					&& (destinationVertex.equals(r.getDestination()) || destinationVertex.equals(r.getSource()))) {
 				return r;
 			}
 		}
 		return null;
-//	  
-//    if (sourceVertex == null || destinationVertex == null) {
-//      return null;
-//    }
-//    return roads.stream().filter(r -> r.contains(sourceVertex) && r.contains(destinationVertex))
-//        .findAny().orElse(null);
 	}
 
+	/**
+	 * returns true if theres an edge going from the source to the destination
+	 */
 	@Override
-	public Road addEdge(Town sourceVertex, Town destinationVertex, int distance, String description)
-			throws IllegalArgumentException, NullPointerException {
-		if (sourceVertex == null || destinationVertex == null) {
-			throw new NullPointerException();
+	public boolean containsEdge(Town beginningPoint, Town destinationVertex) {
+		for (Road r : roads) {
+			if (r.contains(beginningPoint) && r.contains(destinationVertex)) {
+				return true;
+			}
 		}
-		if (!containsVertex(sourceVertex) || !containsVertex(destinationVertex)) {
-			throw new IllegalArgumentException();
-		}
-		Road road = new Road(sourceVertex, destinationVertex, distance, description);
-		roads.add(road);
-		return road;
+		return false;
 	}
 
+	/**
+	 * adds the vertex if its not already in the graph
+	 */
 	@Override
 	public boolean addVertex(Town t) throws NullPointerException {
 		if (t == null) {
@@ -70,48 +83,68 @@ public class Graph implements GraphInterface<Town, Road> {
 		return false;
 	}
 
+	/**
+	 * checks if the graph contains the vertex
+	 */
 	@Override
-	public boolean containsEdge(Town sourceVertex, Town destinationVertex) {
-		for (Road r : roads) {
-			if (r.contains(sourceVertex) && r.contains(destinationVertex)) {
+	public boolean containsVertex(Town v) {
+		for (Town t : towns) {
+			if (t.equals(v)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	@Override
-	public boolean containsVertex(Town t) {
-		return towns.contains(t);
-	}
-
+	/**
+	 * sets the edges of the graph
+	 */
 	@Override
 	public Set<Road> edgeSet() {
 		return roads;
 	}
 
+	/**
+	 * returns all edges in a set connected to the vertex that's we want
+	 */
 	@Override
-	public Set<Road> edgesOf(Town town) {
-		if (town == null) {
+	public Set<Road> edgesOf(Town vertex) {
+		Set<Road> output = new HashSet<Road>();
+		if (vertex == null) {
 			throw new NullPointerException();
 		}
-		Set<Road> roadSet = new HashSet<>();
-		for (Road r : roads) {
-			if (r.contains(town)) {
-				roadSet.add(r);
-			}
-		}
-		if (roadSet.isEmpty()) {
+		if (!containsVertex(vertex)) {
 			throw new IllegalArgumentException();
 		}
-		return roadSet;
+		for (Road r : roads) {
+			if (r.getSource().equals(vertex) || r.getDestination().equals(vertex)) {
+				output.add(r);
+			}
+		}
+		return output;
+//		if (town == null) {
+//			throw new NullPointerException();
+//		}
+//		Set<Road> roadSet = new HashSet<>();
+//		for (Road r : roads) {
+//			if (r.contains(town)) {
+//				roadSet.add(r);
+//			}
+//		}
+//		if (roadSet.isEmpty()) {
+//			throw new IllegalArgumentException();
+//		}
+//		return roadSet;
 	}
 
+	/**
+	 * removes the road from the graph
+	 */
 	@Override
-	public Road removeEdge(Town sourceVertex, Town destinationVertex, int distance, String description) {
+	public Road removeEdge(Town beginningPoint, Town destinationVertex, int distance, String description) {
 		Road road = null;
 		for (Road r : roads) {
-			if (r.contains(destinationVertex) && r.contains(sourceVertex) && (distance > -1) && description != null) {
+			if (r.contains(destinationVertex) && r.contains(beginningPoint) && (distance > -1) && description != null) {
 				road = r;
 			}
 		}
@@ -121,6 +154,9 @@ public class Graph implements GraphInterface<Town, Road> {
 		return null;
 	}
 
+	/**
+	 * removes the town from the graph
+	 */
 	@Override
 	public boolean removeVertex(Town t) {
 		if (t == null) {
@@ -129,19 +165,25 @@ public class Graph implements GraphInterface<Town, Road> {
 		return towns.remove(t);
 	}
 
+	/**
+	 * returns a set of towns
+	 */
 	@Override
 	public Set<Town> vertexSet() {
 		return towns;
 	}
 
+	/**
+	 * shortest path strategy found on geeksforgeeks
+	 */
 	@Override
-	public ArrayList<String> shortestPath(Town sourceVertex, Town destinationVertex) {
+	public ArrayList<String> shortestPath(Town beginningPoint, Town destinationVertex) {
 
 		destination = destinationVertex;
-		dijkstraShortestPath(sourceVertex);
+		dijkstraShortestPath(beginningPoint);
 		ArrayList<Road> roadPath = new ArrayList<>();
 
-		boolean anySource = roads.stream().anyMatch(r -> r.contains(sourceVertex));
+		boolean anySource = roads.stream().anyMatch(r -> r.contains(beginningPoint));
 		boolean anyDest = roads.stream().anyMatch(r -> r.contains(destinationVertex));
 
 		if (!anySource || !anyDest) {
@@ -156,21 +198,17 @@ public class Graph implements GraphInterface<Town, Road> {
 		}
 
 		shortestPath.clear();
-		// towns.clear();
-		// roads.clear();
 		return roadPath.stream().map(Road::toString).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	/**
-	 * Dijkstra's Shortest Path Method using Adjancency Matrix. Internal structures
-	 * are built which hold the ability to retrieve the path, shortest distance from
-	 * the sourceVertex to all the other vertices in the graph, etc.
+	 * Dijkstra's Shortest Path Method using adjacency
 	 * 
-	 * @param sourceVertex - the vertex to find shortest path from
+	 * found on geeksforgeeks
+	 * 
 	 */
 	@Override
-	public void dijkstraShortestPath(Town sourceVertex) {
-		// shortestPath.clear();
+	public void dijkstraShortestPath(Town beginningPoint) {
 		List<Town> vertices = new ArrayList<>(towns);
 
 		int[][] adjacencyMatrix = new int[towns.size()][towns.size()];
@@ -188,7 +226,7 @@ public class Graph implements GraphInterface<Town, Road> {
 
 		int startTown = 0;
 		for (Town t : vertices) {
-			if (!t.equals(sourceVertex)) {
+			if (!t.equals(beginningPoint)) {
 				startTown++;
 			} else {
 				break;
@@ -244,23 +282,24 @@ public class Graph implements GraphInterface<Town, Road> {
 	}
 
 	/**
-	 * Process the shortest paths of towns and add into arraylist
+	 * Find the shortest path method from the beginningPoint or beginningVertex to
+	 * the endPoint or endingVertex
 	 * 
-	 * @param sourceVertex   - index of town
-	 * @param minPathLengths - array with towns short distances
+	 * @param beginningPoint
+	 * @param minPathLengths
 	 */
-	private void computeShortPath(int sourceVertex, int[] minPathLengths) {
+	private void computeShortPath(int beginningPoint, int[] minPathLengths) {
 
-		if (sourceVertex == -1) {
+		if (beginningPoint == -1) {
 			return;
 		}
 
-		computeShortPath(minPathLengths[sourceVertex], minPathLengths);
+		computeShortPath(minPathLengths[beginningPoint], minPathLengths);
 
 		int townIndex = 0;
 
 		for (Town t : towns) {
-			if (townIndex == sourceVertex) {
+			if (townIndex == beginningPoint) {
 				shortestPath.add(t.getName());
 			}
 			townIndex++;

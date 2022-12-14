@@ -158,7 +158,6 @@ public class FXMainPane extends VBox {
 		HBox.setMargin(addRoadTownsHBox, inset);
 		HBox.setMargin(addRoadTownsHBox2, inset);
 
-	    
 		//find connection area components
 	    sourceConnectionComboBox = new ComboBox<String>();
 	    destConnectionComboBox = new ComboBox<String>();

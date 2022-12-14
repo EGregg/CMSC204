@@ -1,3 +1,8 @@
+/**
+ * Author: Edward Gregg
+ * Assignment: Assignment 6
+ * Due Date: 13DEC2022
+ */
 
 
 import java.io.IOException;
@@ -5,27 +10,28 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class DriverFX extends Application {  
+public class DriverFX extends Application {
 	/**
 	 * The main method for the GUI JavaFX version
+	 * 
 	 * @param args not used
 	 * @throws IOException
 	 */
 	public static void main(String[] args) {
-		launch(args);   
+		launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage stage) throws Exception {
-		//  instantiate the FXMainPane, name it root
+		// instantiate the FXMainPane, name it root
 		FXMainPane root = new FXMainPane();
-		//  set the scene to hold root
-		stage.setScene(new Scene(root, 600,700));
-		//set stage title
+		// set the scene to hold root
+		stage.setScene(new Scene(root, 600, 700));
+		// set stage title
 		stage.setTitle("Travelling Student");
-		//display the stage
+		// display the stage
 		stage.show();
-	
+
 	}
 
 }
